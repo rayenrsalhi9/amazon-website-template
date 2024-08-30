@@ -77,13 +77,15 @@ addButtons.forEach(btn => {
       if (productId === el.productId) matchingItem = el;
     });
 
-    if (matchingItem) matchingItem.quantity++;
+    const selectedQuantity = Number(btn.parentElement.querySelector('select').value);
+
+    if (matchingItem) matchingItem.quantity += selectedQuantity;
       else cart.push({
         productId,
-        quantity : 1
+        quantity : selectedQuantity
       });
 
-    console.log
     displayQuantity();
+
   });
 });
