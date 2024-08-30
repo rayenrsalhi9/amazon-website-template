@@ -1,3 +1,4 @@
+
 // select the container that has all products :
 const productsGrid = document.querySelector('.products-grid');
 
@@ -85,6 +86,8 @@ productsList.forEach(i => {
 });
 
 productsGrid.innerHTML = productsGridHtml
+
+
 
 /* productsList.forEach(i => console.log(i.rating.count));
 productsList.forEach(i => console.log(i.rating.stars)); */
