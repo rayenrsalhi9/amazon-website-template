@@ -70,7 +70,7 @@ addButtons.forEach(btn => {
       btn.parentElement.querySelector('.added-to-cart').style.opacity = '0';
     }, 2000);
 
-    const productId = btn.dataset.productId;
+    const {productId} = btn.dataset;
     let matchingItem = false;
 
     cart.forEach(el => {
