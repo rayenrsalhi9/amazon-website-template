@@ -83,6 +83,6 @@ addButtons.forEach(btn => {
         quantity : 1
       });
 
-    console.log(cart);
+    updateQuantity();
   });
 });
