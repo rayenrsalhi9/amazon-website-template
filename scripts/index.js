@@ -58,15 +58,17 @@ products.forEach(i => {
 
 productsGrid.innerHTML = productsGridHtml;
 
-
+let opacity;
 
 const addButtons = document.querySelectorAll('.add-to-cart-button');
 addButtons.forEach(btn => {
   btn.addEventListener('click', () => {
 
+    clearTimeout(opacity);
+
     btn.parentElement.querySelector('.added-to-cart').style.opacity = '1';
 
-    setTimeout(() => {
+    opacity = setTimeout(() => {
       btn.parentElement.querySelector('.added-to-cart').style.opacity = '0';
     }, 2000);
 
