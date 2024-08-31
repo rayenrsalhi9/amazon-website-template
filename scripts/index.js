@@ -1,4 +1,5 @@
 import {cart, cartQuantity, displayQuantity} from '../data/cart.js';
+import {products} from '../data/products.js';
 
 // select the container that has all products :
 const productsGrid = document.querySelector('.products-grid');
