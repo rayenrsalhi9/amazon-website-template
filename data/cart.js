@@ -8,4 +8,21 @@ function displayQuantity() {
     cartQuantity.innerHTML = quantity;
 }
 
-export {cart , cartQuantity, displayQuantity}
+function updateQuantity(productId, btn) {
+
+    let matchingItem = false;
+  
+    cart.forEach(el => {
+      if (productId === el.productId) matchingItem = el;
+    });
+  
+    const selectedQuantity = Number(btn.parentElement.querySelector('select').value);
+  
+    if (matchingItem) matchingItem.quantity += selectedQuantity;
+      else cart.push({
+        productId,
+        quantity : selectedQuantity
+      });
+  }
+
+export {cart , cartQuantity,updateQuantity, displayQuantity}

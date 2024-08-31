@@ -1,13 +1,12 @@
-import {cart, cartQuantity, displayQuantity} from '../data/cart.js';
+import {cart, cartQuantity, updateQuantity, displayQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 // select the container that has all products :
 const productsGrid = document.querySelector('.products-grid');
-
 addProductsToPage(productsGrid);
 
-let opacity;
 const addButtons = document.querySelectorAll('.add-to-cart-button');
+let opacity;
 
 addButtons.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -23,23 +22,7 @@ addButtons.forEach(btn => {
   });
 });
 
-function updateQuantity(productId, btn) {
-
-  let matchingItem = false;
-
-  cart.forEach(el => {
-    if (productId === el.productId) matchingItem = el;
-  });
-
-  const selectedQuantity = Number(btn.parentElement.querySelector('select').value);
-
-  if (matchingItem) matchingItem.quantity += selectedQuantity;
-    else cart.push({
-      productId,
-      quantity : selectedQuantity
-    });
-}
-
+// functions :
 function addProductsToPage(productsGrid) {
 
   let productsGridHtml = '';
