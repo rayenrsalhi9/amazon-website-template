@@ -1,4 +1,4 @@
-import {cart, cartQuantity, updateQuantity, displayQuantity} from '../data/cart.js';
+import * as cartModule from '../data/cart.js';
 import {products} from '../data/products.js';
 
 // select the container that has all products :
@@ -15,9 +15,9 @@ addButtons.forEach(btn => {
 
     const {productId} = btn.dataset;
     
-    updateQuantity(productId, btn);
+    cartModule.updateQuantity(productId, btn);
 
-    displayQuantity();
+    cartModule.displayQuantity();
 
   });
 });
