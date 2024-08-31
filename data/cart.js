@@ -7,3 +7,5 @@ function displayQuantity() {
     cart.forEach(i => quantity += i.quantity);
     cartQuantity.innerHTML = quantity;
 }
+
+export {cart , cartQuantity, displayQuantity}
