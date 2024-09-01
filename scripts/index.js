@@ -17,6 +17,7 @@ addButtons.forEach(btn => {
     
     cartModule.updateQuantity(productId, btn);
     cartModule.displayQuantity();
+    cartModule.saveToLocalStorage();
 
   });
 });

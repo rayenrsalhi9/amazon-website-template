@@ -1,4 +1,4 @@
-import { cart, removeItemFromCart } from '../data/cart.js';
+import { cart, removeItemFromCart, saveToLocalStorage } from '../data/cart.js';
 import { products } from '../data/products.js';
 
 // selecting items :
@@ -20,6 +20,8 @@ deleteButtons.forEach(btn => {
         const buttonId = btn.dataset.id;
 
         removeItemFromCart(buttonId);
+
+        saveToLocalStorage()
 
         document.querySelector(`.js-${buttonId}`).remove();
 
