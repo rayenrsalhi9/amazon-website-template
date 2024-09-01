@@ -16,7 +16,6 @@ addButtons.forEach(btn => {
     const {productId} = btn.dataset;
     
     cartModule.updateQuantity(productId, btn);
-
     cartModule.displayQuantity();
 
   });
