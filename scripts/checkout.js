@@ -21,8 +21,6 @@ deleteButtons.forEach(btn => {
 
         removeItemFromCart(buttonId);
 
-        saveToLocalStorage()
-
         document.querySelector(`.js-${buttonId}`).remove();
 
         addQuantityToHomeLink();

@@ -2,7 +2,6 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 const cartQuantity = document.querySelector('.cart-quantity');
 
-
 function displayQuantity() {
     let quantity = 0
     cart.forEach(i => quantity += i.quantity);
@@ -24,6 +23,8 @@ function updateQuantity(productId, btn) {
         productId,
         quantity : selectedQuantity
       });
+
+      saveToLocalStorage();
   }
 
 function removeItemFromCart(buttonId) {
@@ -35,6 +36,8 @@ function removeItemFromCart(buttonId) {
   });
 
   cart = newCart;
+
+  saveToLocalStorage();
 
 }
 

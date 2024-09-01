@@ -1,6 +1,8 @@
 import * as cartModule from '../data/cart.js';
 import {products} from '../data/products.js';
 
+cartModule.displayQuantity();
+
 // select the container that has all products :
 const productsGrid = document.querySelector('.products-grid');
 addProductsToPage(productsGrid);
@@ -17,7 +19,6 @@ addButtons.forEach(btn => {
     
     cartModule.updateQuantity(productId, btn);
     cartModule.displayQuantity();
-    cartModule.saveToLocalStorage();
 
   });
 });
