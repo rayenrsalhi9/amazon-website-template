@@ -21,6 +21,10 @@ deleteButtons.forEach(btn => {
 
         removeItemFromCart(buttonId);
 
+        document.querySelector(`.js-${buttonId}`).remove();
+
+        addQuantityToHomeLink();
+
     });
 });
 
@@ -50,7 +54,7 @@ function addProductsToCheckout(orderSummary) {
 
         orderSummaryHtml += `
 
-            <div class="cart-item-container">
+            <div class="cart-item-container js-${matchingProduct.id}">
 
                 <div class="delivery-date"> Delivery date: Tuesday, June 21</div>
 
@@ -105,7 +109,7 @@ function addProductsToCheckout(orderSummary) {
                 </div>
             </div>
 
-`
+`;
 };
 
     orderSummary.innerHTML = orderSummaryHtml;
