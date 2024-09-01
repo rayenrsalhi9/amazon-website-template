@@ -1,4 +1,9 @@
-let cart = [];
+let cart = [
+  /* {
+    productId: '54e0eccd-8f36-462b-b68a-8182611d9add',
+    quantity: 2
+  } */
+];
 
 const cartQuantity = document.querySelector('.cart-quantity');
 

@@ -6,6 +6,26 @@ const orderSummary = document.querySelector('.order-summary');
 
 addProductsToCheckout(orderSummary);
 
+const deleteButtons = document.querySelectorAll('.delete-quantity-link');
+
+deleteButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        
+        const buttonId = btn.dataset.id;
+
+        let matchingIdProduct;
+        
+        cart.forEach(i => {
+            if (buttonId === i.productId) matchingIdProduct = i;
+        });
+
+        cart.splice(matchingIdProduct, 1);
+
+        addProductsToCheckout(orderSummary);
+
+    });
+});
+
 function addProductsToCheckout(orderSummary) {
 
     let orderSummaryHtml = '';
@@ -46,7 +66,7 @@ function addProductsToCheckout(orderSummary) {
 
                             <span> Quantity: <span class="quantity-label">${cart[i].quantity}</span> </span>
                             <span class="update-quantity-link link-primary"> Update </span>
-                            <span class="delete-quantity-link link-primary"> Delete </span>
+                            <span class="delete-quantity-link link-primary" data-id="${productId}"> Delete </span>
 
                         </div>
                     </div>
@@ -87,5 +107,4 @@ function addProductsToCheckout(orderSummary) {
 };
 
     orderSummary.innerHTML = orderSummaryHtml;
-
 }
