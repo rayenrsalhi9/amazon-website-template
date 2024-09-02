@@ -1,11 +1,37 @@
 import { cart, removeItemFromCart, saveToLocalStorage, updateQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 
+// external library :
+const todaysDate = dayjs();
+const todaysDateFormat = todaysDate.format('dddd,MMMM D');
+
+const sevenDaysLater = todaysDate.add(7, 'day').format('dddd,MMMM D');
+const threeDaysLater = todaysDate.add(3, 'day').format('dddd,MMMM D');
+const oneDayLater = todaysDate.add(1, 'day').format('dddd,MMMM D');
+
+
+
 // selecting items :
 const orderSummary = document.querySelector('.order-summary');
 const homeLink = document.querySelector('.return-to-home-link');
 
 addProductsToCheckout(orderSummary);
+
+const cartItems = document.querySelectorAll('.cart-item-container');
+cartItems.forEach(item => {
+
+    const deliveryDateDiv = item.querySelector('.delivery-date');
+    const radioButtons = item.querySelectorAll('.delivery-option-input');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.checked) {
+                const selectedDate = radio.dataset.date;
+                deliveryDateDiv.innerHTML = `Delivery date: ${selectedDate}`;
+            }
+        })
+    })
+    
+}); 
 
 // update quantity in home link :
 let linkQuantity = 0;
@@ -83,7 +109,7 @@ function addProductsToCheckout(orderSummary) {
 
             <div class="cart-item-container js-${matchingProduct.id}">
 
-                <div class="delivery-date"> Delivery date: Tuesday, June 21</div>
+                <div class="delivery-date"> Delivery date: ${sevenDaysLater}</div>
 
                 <div class="cart-item-details-grid">
 
@@ -111,25 +137,25 @@ function addProductsToCheckout(orderSummary) {
                         <div class="delivery-options-title"> Choose a delivery option: </div>
 
                         <div class="delivery-option">
-                            <input type="radio" checked class="delivery-option-input" name="delivery-option-${cart[i].productId}">
+                            <input type="radio" checked class="delivery-option-input" name="delivery-option-${cart[i].productId}" data-date="${sevenDaysLater}">
                             <div>
-                                <div class="delivery-option-date"> Tuesday, June 21 </div>
+                                <div class="delivery-option-date"> ${sevenDaysLater} </div>
                                 <div class="delivery-option-price"> FREE Shipping </div>
                             </div>
                         </div>
 
                         <div class="delivery-option">
-                            <input type="radio" class="delivery-option-input" name="delivery-option-${cart[i].productId}">
+                            <input type="radio" class="delivery-option-input" name="delivery-option-${cart[i].productId}" data-date="${threeDaysLater}">
                             <div>
-                                <div class="delivery-option-date"> Wednesday, June 15 </div>
+                                <div class="delivery-option-date"> ${threeDaysLater} </div>
                                 <div class="delivery-option-price"> $4.99 - Shipping </div>
                             </div>
                         </div>
 
                         <div class="delivery-option">
-                            <input type="radio" class="delivery-option-input" name="delivery-option-${cart[i].productId}">
+                            <input type="radio" class="delivery-option-input" name="delivery-option-${cart[i].productId}" data-date="${oneDayLater}">
                             <div>
-                                <div class="delivery-option-date"> Monday, June 13 </div>
+                                <div class="delivery-option-date"> ${oneDayLater} </div>
                                 <div class="delivery-option-price"> $9.99 - Shipping </div>
                             </div>
                         </div>
