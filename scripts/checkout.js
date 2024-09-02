@@ -45,7 +45,7 @@ updateButtons.forEach(btn => {
         quantitySpan.innerHTML = '';
 
         saveButton.addEventListener('click', (e) => {
-            if (inputArea.value === '') e.preventDefault;
+            if (inputArea.value === '' || !inputArea.value.match(/[0-9]/ig)) e.preventDefault;
             else {
                 inputArea.classList.add('hidden');
                 saveButton.classList.add('hidden');
