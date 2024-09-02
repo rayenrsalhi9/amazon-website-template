@@ -1,4 +1,4 @@
-import { cart, removeItemFromCart, saveToLocalStorage } from '../data/cart.js';
+import { cart, removeItemFromCart, saveToLocalStorage, updateQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 
 // selecting items :
@@ -28,7 +28,34 @@ deleteButtons.forEach(btn => {
     });
 });
 
+// add event listeners to update buttons :
+const updateButtons = document.querySelectorAll('.update-quantity-link');
+updateButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
 
+        const updateButtonId = btn.dataset.id;
+
+        const inputArea = btn.parentElement.querySelector('.quantity-input');
+        const saveButton = btn.parentElement.querySelector('.save-quantity-link');
+        const quantitySpan = btn.parentElement.querySelector('.quantity-label');
+
+        inputArea.classList.toggle('hidden');
+        saveButton.classList.toggle('hidden');
+        btn.classList.add('hidden');
+        quantitySpan.innerHTML = '';
+
+        saveButton.addEventListener('click', (e) => {
+            if (inputArea.value === '') e.preventDefault;
+            else {
+                inputArea.classList.add('hidden');
+                saveButton.classList.add('hidden');
+                btn.classList.remove('hidden');
+                quantitySpan.innerHTML = Number(inputArea.value);
+                updateSavedQuantity(updateButtonId, Number(inputArea.value));
+            }
+        })
+    });
+});
 
 // functions :
 
@@ -71,7 +98,9 @@ function addProductsToCheckout(orderSummary) {
                         <div class="product-quantity">
 
                             <span> Quantity: <span class="quantity-label">${cart[i].quantity}</span> </span>
-                            <span class="update-quantity-link link-primary"> Update </span>
+                            <span class="update-quantity-link link-primary" data-id="${matchingProduct.id}"> Update </span>
+                            <input class="quantity-input hidden">
+                            <span class="save-quantity-link hidden link-primary">Save</span>
                             <span class="delete-quantity-link link-primary" data-id="${matchingProduct.id}"> Delete </span>
 
                         </div>
@@ -124,4 +153,18 @@ function addQuantityToHomeLink() {
     });
 
     homeLink.innerHTML = `${linkQuantity} items`;
+}
+
+function updateSavedQuantity(updateButtonId, inputAreaValue) {
+
+    let matchingItem;
+
+    cart.forEach(i => {
+        if (updateButtonId === i.productId) matchingItem = i;
+    });
+
+    matchingItem.quantity = inputAreaValue;
+
+    saveToLocalStorage();
+
 }

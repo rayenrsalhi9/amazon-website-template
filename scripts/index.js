@@ -1,7 +1,7 @@
 import * as cartModule from '../data/cart.js';
 import {products} from '../data/products.js';
 
-if (cartModule.quantity !== 0) cartModule.displayQuantity();
+cartModule.displayQuantity();
 
 // select the container that has all products :
 const productsGrid = document.querySelector('.products-grid');
