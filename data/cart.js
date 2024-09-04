@@ -1,6 +1,6 @@
-//let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-let cart = [
+/* let cart = [
   {
     productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
     quantity: 2,
@@ -11,7 +11,7 @@ let cart = [
     quantity: 1,
     deliveryOptionId: '2'
   }
-];
+]; */
 
 const cartQuantity = document.querySelector('.cart-quantity');
 
@@ -36,7 +36,8 @@ function updateQuantity(productId, btn) {
     if (matchingItem) matchingItem.quantity += selectedQuantity;
       else cart.push({
         productId,
-        quantity : selectedQuantity
+        quantity : selectedQuantity,
+        deliveryOptionId: '1'
       });
 
       saveToLocalStorage();
@@ -60,4 +61,16 @@ function saveToLocalStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-export {cart , quantity,cartQuantity,updateQuantity, displayQuantity, removeItemFromCart, saveToLocalStorage}
+function updateDeliveryOption(productId, deliveryOptionId) {
+  let matchingCartItem;
+  cart.forEach(cartItem => {
+    if (cartItem.productId === productId) matchingCartItem = cartItem;
+  });
+
+  matchingCartItem.deliveryOptionId = deliveryOptionId;
+
+  saveToLocalStorage();
+
+}
+
+export {cart , quantity,cartQuantity,updateQuantity, displayQuantity, removeItemFromCart, saveToLocalStorage, updateDeliveryOption}

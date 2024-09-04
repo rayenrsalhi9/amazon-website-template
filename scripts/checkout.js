@@ -1,4 +1,4 @@
-import { cart, removeItemFromCart, saveToLocalStorage } from '../data/cart.js';
+import { cart, removeItemFromCart, saveToLocalStorage, updateDeliveryOption } from '../data/cart.js';
 import deliveryOptions from '../data/deliveryOptions.js';
 import { products } from '../data/products.js';
 
@@ -7,25 +7,6 @@ const orderSummary = document.querySelector('.order-summary');
 const homeLink = document.querySelector('.return-to-home-link');
 
 addProductsToCheckout(orderSummary);
-
-/* const cartItems = document.querySelectorAll('.cart-item-container');
-cartItems.forEach(item => {
-
-    const deliveryDateDiv = item.querySelector('.delivery-date');
-    const radioButtons = item.querySelectorAll('.delivery-option-input');
-    radioButtons.forEach(radio => {
-            if (radio.checked) {
-                const selectedDate = radio.dataset.date;
-                deliveryDateDiv.innerHTML = `Delivery date: ${selectedDate}`;
-            }
-            radio.addEventListener('change', () => {
-                if (radio.checked) {
-                    const selectedDate = radio.dataset.date;
-                    deliveryDateDiv.innerHTML = `Delivery date: ${selectedDate}`;
-                }
-            });
-        });
-    }); */ 
 
 // update quantity in home link :
 let linkQuantity = 0;
@@ -75,6 +56,16 @@ updateButtons.forEach(btn => {
         })
     });
 });
+
+// handle click on delivery options :
+document.querySelectorAll('.delivery-option').forEach(option => {
+    option.addEventListener('click', () => {
+        const productId = option.querySelector('.delivery-option-input').dataset.productId;
+        const deliveryOptionId = option.querySelector('.delivery-option-input').dataset.deliveryOptionId;
+        updateDeliveryOption(productId, deliveryOptionId); 
+    });
+});
+
 
 // functions :
 
@@ -191,7 +182,7 @@ function generateDeliveryOptions(matchingProduct, el) {
 
         <div class="delivery-option">
 
-            <input type="radio" ${isChecked ? 'checked' : ''} class="delivery-option-input" name="delivery-option-${matchingProduct.id}" data-date="${deliveryDate}">
+            <input type="radio" ${isChecked ? 'checked' : ''} class="delivery-option-input" name="delivery-option-${matchingProduct.id}" data-product-id="${matchingProduct.id}" data-delivery-option-id="${option.id}">
             <div>
                 <div class="delivery-option-date"> ${deliveryDate} </div>
                 <div class="delivery-option-price"> ${deliveryCost} Shipping </div>
