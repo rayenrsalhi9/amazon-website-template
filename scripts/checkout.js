@@ -2,7 +2,8 @@ import { cart, removeItemFromCart, saveToLocalStorage, updateDeliveryOption } fr
 import deliveryOptions from '../data/deliveryOptions.js';
 import { products } from '../data/products.js';
 
-// selecting items :
+function renderOrderSummary() {
+    // selecting items :
 const orderSummary = document.querySelector('.order-summary');
 const homeLink = document.querySelector('.return-to-home-link');
 
@@ -63,6 +64,7 @@ document.querySelectorAll('.delivery-option').forEach(option => {
         const productId = option.querySelector('.delivery-option-input').dataset.productId;
         const deliveryOptionId = option.querySelector('.delivery-option-input').dataset.deliveryOptionId;
         updateDeliveryOption(productId, deliveryOptionId); 
+        renderOrderSummary();
     });
 });
 
@@ -196,3 +198,6 @@ function generateDeliveryOptions(matchingProduct, el) {
 
     return deliveryOptionsHtml;
 }
+}
+
+renderOrderSummary();
