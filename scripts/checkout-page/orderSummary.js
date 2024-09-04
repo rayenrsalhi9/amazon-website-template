@@ -1,6 +1,7 @@
 import { cart, removeItemFromCart, saveToLocalStorage, updateDeliveryOption } from '../../data/cart.js';
 import deliveryOptions from '../../data/deliveryOptions.js';
 import { products } from '../../data/products.js';
+import { generatePayment } from './payment.js';
 
 export function renderOrderSummary() {
 
@@ -20,12 +21,10 @@ export function renderOrderSummary() {
         btn.addEventListener('click', () => {
             
             const buttonId = btn.dataset.id;
-
             removeItemFromCart(buttonId);
-
             document.querySelector(`.js-${buttonId}`).remove();
-
             addQuantityToHomeLink();
+            generatePayment();
 
         });
     });
@@ -55,6 +54,7 @@ export function renderOrderSummary() {
                     quantitySpan.innerHTML = Number(inputArea.value);
                     updateSavedQuantity(updateButtonId, Number(inputArea.value));
                     addQuantityToHomeLink();
+                    generatePayment();
                 }
             })
         });
@@ -67,6 +67,7 @@ export function renderOrderSummary() {
             const deliveryOptionId = option.querySelector('.delivery-option-input').dataset.deliveryOptionId;
             updateDeliveryOption(productId, deliveryOptionId); 
             renderOrderSummary();
+            generatePayment();
         });
     });
 
