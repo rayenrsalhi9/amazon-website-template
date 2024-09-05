@@ -39,7 +39,7 @@ export function generatePayment() {
         });
     });
 
-    deliveryCost = deliveryCost === 0 ? 0 : dollarFormat(deliveryCost);
+    deliveryCost = deliveryCost === 0 ? dollarFormat(0) : dollarFormat(deliveryCost);
 
     // calculate total before tax :
     let totalNoTax = Number((total + deliveryCost).toFixed(2));
