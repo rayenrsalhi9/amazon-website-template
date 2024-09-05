@@ -22,7 +22,7 @@ export function renderOrderSummary() {
             
             const buttonId = btn.dataset.id;
             removeItemFromCart(buttonId);
-            document.querySelector(`.js-${buttonId}`).remove();
+            renderOrderSummary();
             addQuantityToHomeLink();
             generatePayment();
 

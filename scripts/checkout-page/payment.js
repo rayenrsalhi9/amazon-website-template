@@ -31,7 +31,7 @@ export function generatePayment() {
     deliveryOptions.forEach(option => {
         cart.forEach(cartItem => {
             if (option.id === cartItem.deliveryOptionId) {
-                matchingDeliveryItem = option;
+                matchingDeliveryItem = option || deliveryOptions[0];
                 deliveryCost += matchingDeliveryItem.deliveryCents;
             };
             
