@@ -2,6 +2,7 @@ import { cart, removeItemFromCart, saveToLocalStorage, updateDeliveryOption } fr
 import deliveryOptions from '../../data/deliveryOptions.js';
 import { products } from '../../data/products.js';
 import { generatePayment } from './payment.js';
+import { dollarFormat } from '../../quickActions/dollarFormat.js';
 
 export function renderOrderSummary() {
 
@@ -128,7 +129,7 @@ export function renderOrderSummary() {
 
                             <div class="product-name"> ${productName} </div>
 
-                            <div class="product-price"> $${(productPrice / 100).toFixed(2)} </div>
+                            <div class="product-price"> $${dollarFormat(productPrice)} </div>
 
                             <div class="product-quantity">
 
@@ -201,7 +202,7 @@ export function renderOrderSummary() {
 
             deliveryDate = deliveryDate.format('dddd,MMMM D');
 
-            const deliveryCost = option.deliveryCents === 0 ? 'FREE' : `$${(option.deliveryCents / 100).toFixed(2)} - `;
+            const deliveryCost = option.deliveryCents === 0 ? 'FREE' : `$${dollarFormat(option.deliveryCents)} - `;
 
             const isChecked = option.id === el.deliveryOptionId;
 

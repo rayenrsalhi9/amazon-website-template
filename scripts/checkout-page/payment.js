@@ -1,6 +1,7 @@
 import { cart } from "../../data/cart.js";
 import deliveryOptions from "../../data/deliveryOptions.js";
 import { products } from "../../data/products.js";
+import { dollarFormat } from "../../quickActions/dollarFormat.js";
 
 export function generatePayment() {
 
@@ -38,7 +39,7 @@ export function generatePayment() {
         });
     });
 
-    deliveryCost = deliveryCost === 0 ? 0 : Number((deliveryCost / 100).toFixed(2));
+    deliveryCost = deliveryCost === 0 ? 0 : dollarFormat(deliveryCost);
 
     // calculate total before tax :
     let totalNoTax = Number((total + deliveryCost).toFixed(2));
