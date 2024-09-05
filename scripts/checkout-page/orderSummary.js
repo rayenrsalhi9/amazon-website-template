@@ -101,13 +101,24 @@ export function renderOrderSummary() {
             });
 
             const todaysDate = dayjs();
-            const deliveryDate = todaysDate.add(matchingIdItem.deliveryDuration, 'day').format('dddd,MMMM D');
+            let deliveryDate = todaysDate.add(matchingIdItem.deliveryDuration, 'day');
+            if (deliveryDate.format('dddd') === 'Saturday') {
+                deliveryDate = deliveryDate.add(2, 'day');
+            } else if (deliveryDate.format('dddd') === 'Sunday') {
+                deliveryDate = deliveryDate.add(1, 'day');
+            } else {
+                deliveryDate = deliveryDate;
+            }
+
+            deliveryDate = deliveryDate.format('dddd,MMMM D');
+        
+            
 
             orderSummaryHtml += `
 
                 <div class="cart-item-container js-${matchingProduct.id}">
 
-                    <div class="delivery-date"> Delivery date: ${deliveryDate}</div>
+                    <div class="delivery-date"> Delivery date: ${deliveryDate} </div>
 
                     <div class="cart-item-details-grid">
 
@@ -178,7 +189,18 @@ export function renderOrderSummary() {
         deliveryOptions.forEach(option => {
 
             const todaysDate = dayjs();
-            const deliveryDate = todaysDate.add(option.deliveryDuration, 'day').format('dddd,MMMM D');
+
+            let deliveryDate = todaysDate.add(option.deliveryDuration, 'day');
+            if (deliveryDate.format('dddd') === 'Saturday') {
+                deliveryDate = deliveryDate.add(2, 'day');
+            } else if (deliveryDate.format('dddd') === 'Sunday') {
+                deliveryDate = deliveryDate.add(1, 'day');
+            } else {
+                deliveryDate = deliveryDate;
+            }
+
+            deliveryDate = deliveryDate.format('dddd,MMMM D');
+
             const deliveryCost = option.deliveryCents === 0 ? 'FREE' : `$${(option.deliveryCents / 100).toFixed(2)} - `;
 
             const isChecked = option.id === el.deliveryOptionId;
