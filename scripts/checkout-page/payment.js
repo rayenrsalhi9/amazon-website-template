@@ -31,7 +31,7 @@ export function generatePayment() {
     deliveryOptions.forEach(option => {
         cart.forEach(cartItem => {
             if (option.id === cartItem.deliveryOptionId) {
-                matchingDeliveryItem = option || deliveryOptions[0];
+                matchingDeliveryItem = option;
                 deliveryCost += matchingDeliveryItem.deliveryCents;
             };
             
@@ -41,7 +41,7 @@ export function generatePayment() {
     deliveryCost = deliveryCost === 0 ? 0 : Number((deliveryCost / 100).toFixed(2));
 
     // calculate total before tax :
-    let totalNoTax = total + deliveryCost;
+    let totalNoTax = Number((total + deliveryCost).toFixed(2));
 
     // calculate tax :
     let tax = Number(((totalNoTax / 100) * 10).toFixed(2));
