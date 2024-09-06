@@ -131,13 +131,13 @@ export function renderOrderSummary() {
 
                             <div class="product-price"> $${dollarFormat(productPrice)} </div>
 
-                            <div class="product-quantity">
+                            <div class="product-quantity js-product-quantity-${matchingProduct.id}">
 
                                 <span> Quantity: <span class="quantity-label">${el.quantity}</span> </span>
                                 <span class="update-quantity-link link-primary" data-id="${matchingProduct.id}"> Update </span>
                                 <input class="quantity-input hidden">
                                 <span class="save-quantity-link hidden link-primary">Save</span>
-                                <span class="delete-quantity-link link-primary" data-id="${matchingProduct.id}"> Delete </span>
+                                <span class="delete-quantity-link link-primary js-delete-quantity-link-${matchingProduct.id}" data-id="${matchingProduct.id}"> Delete </span>
 
                             </div>
                         </div>
