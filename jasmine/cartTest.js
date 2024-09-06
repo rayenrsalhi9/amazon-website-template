@@ -1,4 +1,4 @@
-import { cart, updateQuantity, loadCartFromStorage } from "../data/cart.js";
+import { cart, updateQuantity, loadCartFromStorage, removeItemFromCart } from "../data/cart.js";
 
 describe('test suite: adds products to cart', () => {
 
@@ -82,4 +82,39 @@ describe('test suite: adds products to cart', () => {
 
     });
 
+});
+
+describe('test suite: removeFromCart', () => {
+    it('removes a productId that is in the cart', () => {
+
+        spyOn(localStorage, 'setItem');
+
+        spyOn(localStorage, 'getItem').and.callFake(() => {
+            return JSON.stringify([
+                {
+                productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
+                quantity: 1,
+                deliveryOptionId: '2'
+                }
+            ]);
+        });
+
+        loadCartFromStorage();
+
+        const testContainer = document.querySelector('.test-container');
+        testContainer.innerHTML = `
+            <span class="delete-quantity-link link-primary js-delete-quantity-link-15b6fc6f-327a-4ec4-896f-486349e85a3d" data-id="15b6fc6f-327a-4ec4-896f-486349e85a3d"> Delete </span>
+        `;
+
+        const button = document.querySelector('.js-delete-quantity-link-15b6fc6f-327a-4ec4-896f-486349e85a3d');
+        const buttonId = button.dataset.id;
+        
+        removeItemFromCart(buttonId);
+
+        expect(cart.length).toEqual(0);
+        
+        expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+        expect(localStorage.setItem).toHaveBeenCalledWith('cart', '[]');
+
+    });
 });
