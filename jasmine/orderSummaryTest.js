@@ -34,7 +34,11 @@ describe('test suite: renderOrderSummary', () => {
 
         loadCartFromStorage();
         renderOrderSummary();
-    })
+    });
+
+    afterEach(() => {
+        testContainer.innerHTML = '';
+    });
 
     it ('displays cart on page', () => {
         products = document.querySelectorAll('.cart-item-container');
@@ -43,7 +47,14 @@ describe('test suite: renderOrderSummary', () => {
         productQuantity2 = document.querySelector('.js-product-quantity-15b6fc6f-327a-4ec4-896f-486349e85a3d');
         expect(productQuantity2.innerText).toContain('Quantity: 1');
 
-        testContainer.innerHTML = '';
+        expect(
+            document.querySelector('.js-product-price-15b6fc6f-327a-4ec4-896f-486349e85a3d').innerText
+        ).toEqual('$20.95');
+
+        expect(
+            document.querySelector('.js-product-name-15b6fc6f-327a-4ec4-896f-486349e85a3d').innerText
+        ).toEqual('Intermediate Size Basketball');
+
     });
 
     it('deletes a product correctly', () => {
@@ -75,7 +86,5 @@ describe('test suite: renderOrderSummary', () => {
 
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         
-        testContainer.innerHTML = '';
     });
-
 });

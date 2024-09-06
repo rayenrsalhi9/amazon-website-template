@@ -127,9 +127,9 @@ export function renderOrderSummary() {
 
                         <div class="cart-item-details">
 
-                            <div class="product-name"> ${productName} </div>
+                            <div class="product-name js-product-name-${matchingProduct.id}"> ${productName} </div>
 
-                            <div class="product-price"> $${dollarFormat(productPrice)} </div>
+                            <div class="product-price js-product-price-${matchingProduct.id}"> $${dollarFormat(productPrice)} </div>
 
                             <div class="product-quantity js-product-quantity-${matchingProduct.id}">
 
