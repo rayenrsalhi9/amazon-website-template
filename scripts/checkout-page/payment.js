@@ -11,7 +11,6 @@ export function generatePayment() {
         items += cartItem.quantity;
     });
 
-    // calculate total price :
     let total = 0;
     let matchingItem;
     products.forEach(product => {
@@ -24,9 +23,6 @@ export function generatePayment() {
         });
     });
 
-    total = total === 0 ? 0 : Number((total / 100).toFixed(2));
-
-    // calcualte delivery cost :
     let deliveryCost = 0;
     let matchingDeliveryItem;
     deliveryOptions.forEach(option => {
@@ -39,16 +35,16 @@ export function generatePayment() {
         });
     });
 
-    deliveryCost = deliveryCost === 0 ? dollarFormat(0) : dollarFormat(deliveryCost);
+    let totalNoTax = total + deliveryCost;
+    let tax = (totalNoTax  * 10) / 100;
+    let totalWithTax = totalNoTax + tax;
 
-    // calculate total before tax :
-    let totalNoTax = Number((total + deliveryCost).toFixed(2));
-
-    // calculate tax :
-    let tax = Number(((totalNoTax / 100) * 10).toFixed(2));
-    
-    // calculate final price :
-    let totalWithTax = Number((totalNoTax + tax).toFixed(2));
+    // convert all prices to dollar
+    total = dollarFormat(total);
+    deliveryCost = dollarFormat(deliveryCost);
+    totalNoTax = dollarFormat(totalNoTax);
+    tax = dollarFormat(tax);
+    totalWithTax = dollarFormat(totalWithTax);
 
     // generate html :
     let paymentHtml = '';
