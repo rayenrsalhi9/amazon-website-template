@@ -3,12 +3,12 @@ import { dollarFormat } from "../quickActions/dollarFormat.js";
 console.log('*** Testing suite 1 : dollarFormat test ***');
 
 console.log('1/ Testing a basic value : ');
-if (dollarFormat(2095) === 20.95) {
+if (dollarFormat(2095) === '20.95') {
     console.log('=> passed');
 } else console.log('=> failed');
 
 console.log('2/ Testing a value 0 : ');
-if (dollarFormat(0) === 0.00) {
+if (dollarFormat(0) === '0.00') {
     console.log('=> passed');
 } else console.log('=> failed');
 
