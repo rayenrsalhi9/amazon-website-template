@@ -7,6 +7,9 @@ describe('test suite: adds products to cart', () => {
     let selectedValue;
 
     beforeEach(() => {
+
+        spyOn(localStorage, 'setItem');
+
         testContainer = document.querySelector('.test-container');
         testContainer.innerHTML = `
             <div class="product-container">
@@ -30,10 +33,12 @@ describe('test suite: adds products to cart', () => {
         button = testContainer.querySelector('.add-to-cart-button');
         selectedValue = Number(button.parentElement.querySelector('select').value);
     });
-    it('adds a new product', () => {
 
-        spyOn(localStorage, 'setItem');
-        // prevent localStorage from modifying localStorage in the main file
+    afterEach(() => {
+        testContainer.innerHTML = '';
+    });
+
+    it('adds a new product', () => {
 
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([]);
@@ -48,13 +53,11 @@ describe('test suite: adds products to cart', () => {
         expect(cart[0].quantity).toEqual(selectedValue);
 
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+        expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
 
-        testContainer.innerHTML = '';
     });
 
     it('adds an already existing product to cart', () => {
-
-        spyOn(localStorage, 'setItem');
 
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([
@@ -75,8 +78,8 @@ describe('test suite: adds products to cart', () => {
         expect(cart.length).toEqual(1);
 
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+        expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
 
-        testContainer.innerHTML = '';
     });
 
 });
