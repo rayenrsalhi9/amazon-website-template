@@ -208,9 +208,9 @@ export function renderOrderSummary() {
 
             deliveryOptionsHtml += `
 
-            <div class="delivery-option">
+            <div class="delivery-option js-delivery-option-${matchingProduct.id}-${option.id}">
 
-                <input type="radio" ${isChecked ? 'checked' : ''} class="delivery-option-input" name="delivery-option-${matchingProduct.id}" data-product-id="${matchingProduct.id}" data-delivery-option-id="${option.id}">
+                <input type="radio" ${isChecked ? 'checked' : ''} class="delivery-option-input js-delivery-option-input-${matchingProduct.id}-${option.id}" name="delivery-option-${matchingProduct.id}" data-product-id="${matchingProduct.id}" data-delivery-option-id="${option.id}">
                 <div>
                     <div class="delivery-option-date"> ${deliveryDate} </div>
                     <div class="delivery-option-price"> ${deliveryCost} Shipping </div>

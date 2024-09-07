@@ -58,12 +58,12 @@ export function generatePayment() {
 
         <div class="payment-summary-row">
             <div> Shipping &amp; handling: </div>
-            <div class="payment-summary-money"> $${deliveryCost} </div>
+            <div class="payment-summary-money js-delivery-cost"> $${deliveryCost} </div>
         </div>
 
         <div class="payment-summary-row subtotal-row">
             <div> Total before tax: </div>
-            <div class="payment-summary-money"> $${totalNoTax} </div>
+            <div class="payment-summary-money js-total-no-tax"> $${totalNoTax} </div>
         </div>
 
         <div class="payment-summary-row">

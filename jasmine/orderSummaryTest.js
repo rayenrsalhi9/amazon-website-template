@@ -1,5 +1,7 @@
 import { renderOrderSummary } from "../scripts/checkout-page/orderSummary.js";
-import { loadCartFromStorage, cart } from "../data/cart.js";
+import { loadCartFromStorage, cart, updateDeliveryOption } from "../data/cart.js";
+import { generatePayment } from "../scripts/checkout-page/payment.js";
+
 
 describe('test suite: renderOrderSummary', () => {
 
@@ -86,5 +88,40 @@ describe('test suite: renderOrderSummary', () => {
 
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         
+    });
+
+    it('updates delivery option', () => {
+
+        const deliveryOption3 = document.querySelector('.js-delivery-option-15b6fc6f-327a-4ec4-896f-486349e85a3d-3');
+
+        const input3 = deliveryOption3.querySelector('input');
+        
+        const input3productId = input3.dataset.productId;
+        const input3deliveryId = input3.dataset.deliveryOptionId;
+
+        deliveryOption3.click();
+
+        updateDeliveryOption(input3productId, input3deliveryId);
+        renderOrderSummary();
+        generatePayment();
+
+        expect(
+            cart[1].deliveryOptionId
+        ).toEqual('3');
+
+        expect(
+            cart[1].productId
+        ).toEqual('15b6fc6f-327a-4ec4-896f-486349e85a3d');
+
+        expect(
+            document.querySelector('.payment-summary')
+                .querySelector('.js-delivery-cost').innerText
+        ).toEqual('$9.99');
+
+        expect(
+            document.querySelector('.payment-summary')
+        .querySelector('.js-total-no-tax').innerText
+        ).toEqual('$52.74');
+
     });
 });
