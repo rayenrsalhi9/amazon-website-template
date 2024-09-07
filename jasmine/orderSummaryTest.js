@@ -123,5 +123,7 @@ describe('test suite: renderOrderSummary', () => {
         .querySelector('.js-total-no-tax').innerText
         ).toEqual('$52.74');
 
+        expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+
     });
 });
