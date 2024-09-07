@@ -67,6 +67,8 @@ function addProductsToPage(productsGrid) {
               </select>
             </div>
 
+            ${i.showSizeChart()}
+
             <div class="product-spacer"></div>
 
             <div class="added-to-cart">
