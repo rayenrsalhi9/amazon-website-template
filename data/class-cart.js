@@ -1,19 +1,19 @@
 class Cart {
     
     products;
-    localStorageKey;
+    #localStorageKey;
 
     constructor(key) {
-        this.localStorageKey = key;
-        this.loadFromStorage();
+        this.#localStorageKey = key;
+        this.#loadFromStorage();
     }
     
-    loadFromStorage () {
-        this.products = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
+    #loadFromStorage () {
+        this.products = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
     };
     
     saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.products));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.products));
     };
     
     updateQuantity(productId, btn) {
@@ -31,7 +31,7 @@ class Cart {
             quantity : selectedQuantity,
             deliveryOptionId: '1'
         });
-        this.saveToLocalStorage();
+        this.saveToStorage();
     };
     
     removeItem(buttonId) {
@@ -44,7 +44,7 @@ class Cart {
     
         this.products = newCart;
     
-        this.saveToLocalStorage();
+        this.saveToStorage();
     
     };
     
@@ -56,7 +56,7 @@ class Cart {
     
         matchingCartItem.deliveryOptionId = deliveryOptionId;
     
-        this.saveToLocalStorage();
+        this.saveToStorage();
     };
     
     displayQuantity() {
