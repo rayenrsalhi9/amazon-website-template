@@ -42,14 +42,14 @@ function addProductsToPage(productsGrid) {
 
             <div class="product-rating-container">
               <img class="product-rating-stars"
-                src="images/ratings/rating-${i.rating.stars * 10}.png">
+                src="${i.getStarsUrl()}">
               <div class="product-rating-count link-primary">
                 ${i.rating.count}
               </div>
             </div>
 
             <div class="product-price">
-              $${(i.priceCents / 100).toFixed(2)}
+              ${i.getPrice()}
             </div>
 
             <div class="product-quantity-container">
