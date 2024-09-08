@@ -67,7 +67,7 @@ function addProductsToPage(productsGrid) {
               </select>
             </div>
 
-            ${i.showSizeChart()}
+            ${i.showExtraInfo()}
 
             <div class="product-spacer"></div>
 
