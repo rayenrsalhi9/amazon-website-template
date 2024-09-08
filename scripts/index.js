@@ -1,7 +1,8 @@
 import * as cartModule from '../data/cart.js';
 import {products} from '../data/products.js';
 
-cartModule.displayQuantity();
+const cartQuantity = document.querySelector('.cart-quantity');
+displayQuantity();
 
 // select the container that has all products :
 const productsGrid = document.querySelector('.products-grid');
@@ -18,7 +19,7 @@ addButtons.forEach(btn => {
     const {productId} = btn.dataset;
     
     cartModule.updateQuantity(productId, btn);
-    cartModule.displayQuantity();
+    displayQuantity();
 
   });
 });
@@ -98,3 +99,14 @@ function alertAddedProduct(opacity, btn) {
     alertSpan.style.opacity = '0';
   }, 2000);
 }
+
+function displayQuantity() {
+  
+  let quantity = 0;
+  cartModule.cart.forEach(i => {
+    quantity += i.quantity;
+  });
+  cartQuantity.innerText = quantity;
+}
+
+export {addProductsToPage}

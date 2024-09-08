@@ -741,4 +741,4 @@ const products = [
   else return new Product(product);
 });
 
-export {products}
+export {products, Product, Clothing, Appliance}
