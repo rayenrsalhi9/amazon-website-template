@@ -1,4 +1,4 @@
-import { cart, removeItemFromCart, saveToLocalStorage, updateDeliveryOption } from '../../data/cart.js';
+import { cart } from '../../data/class-cart.js';
 import deliveryOptions from '../../data/deliveryOptions.js';
 import { products } from '../../data/products.js';
 import { generatePayment } from './payment.js';
@@ -22,7 +22,7 @@ export function renderOrderSummary() {
         btn.addEventListener('click', () => {
             
             const buttonId = btn.dataset.id;
-            removeItemFromCart(buttonId);
+            cart.removeItem(buttonId);
             renderOrderSummary();
             addQuantityToHomeLink();
             generatePayment();
@@ -66,7 +66,7 @@ export function renderOrderSummary() {
         option.addEventListener('click', () => {
             const productId = option.querySelector('.delivery-option-input').dataset.productId;
             const deliveryOptionId = option.querySelector('.delivery-option-input').dataset.deliveryOptionId;
-            updateDeliveryOption(productId, deliveryOptionId); 
+            cart.updateDeliveryOption(productId, deliveryOptionId); 
             renderOrderSummary();
             generatePayment();
         });
@@ -79,9 +79,9 @@ export function renderOrderSummary() {
 
         let orderSummaryHtml = '';
 
-        cart.forEach(el => {
+        cart.products.forEach(product => {
 
-            const productId = el.productId;
+            const productId = product.productId;
 
             let matchingProduct;
 
@@ -95,7 +95,7 @@ export function renderOrderSummary() {
             const productPrice = matchingProduct.priceCents;
             const productName = matchingProduct.name;
 
-            const deliveryOptionId = el.deliveryOptionId;
+            const deliveryOptionId = product.deliveryOptionId;
             let matchingIdItem;
             deliveryOptions.forEach(option => {
                 if (option.id === deliveryOptionId) matchingIdItem = option;
@@ -133,7 +133,7 @@ export function renderOrderSummary() {
 
                             <div class="product-quantity js-product-quantity-${matchingProduct.id}">
 
-                                <span> Quantity: <span class="quantity-label">${el.quantity}</span> </span>
+                                <span> Quantity: <span class="quantity-label">${product.quantity}</span> </span>
                                 <span class="update-quantity-link link-primary" data-id="${matchingProduct.id}"> Update </span>
                                 <input class="quantity-input hidden">
                                 <span class="save-quantity-link hidden link-primary">Save</span>
@@ -146,7 +146,7 @@ export function renderOrderSummary() {
 
                             <div class="delivery-options-title"> Choose a delivery option: </div>
 
-                            ${generateDeliveryOptions(matchingProduct, el)}
+                            ${generateDeliveryOptions(matchingProduct, product)}
 
                         </div>
                     </div>
@@ -162,8 +162,8 @@ export function renderOrderSummary() {
 
         linkQuantity = 0;
 
-        cart.forEach(i => {
-            linkQuantity += i.quantity;
+        cart.products.forEach(product => {
+            linkQuantity += product.quantity;
         });
 
         homeLink.innerHTML = `${linkQuantity} items`;
@@ -173,17 +173,17 @@ export function renderOrderSummary() {
 
         let matchingItem;
 
-        cart.forEach(i => {
-            if (updateButtonId === i.productId) matchingItem = i;
+        cart.products.forEach(product => {
+            if (updateButtonId === product.productId) matchingItem = product;
         });
 
         matchingItem.quantity = inputAreaValue;
 
-        saveToLocalStorage();
+        cart.saveToStorage();
 
     }
 
-    function generateDeliveryOptions(matchingProduct, el) {
+    function generateDeliveryOptions(matchingProduct, product) {
 
         let deliveryOptionsHtml = ''
 
@@ -204,7 +204,7 @@ export function renderOrderSummary() {
 
             const deliveryCost = option.deliveryCents === 0 ? 'FREE' : `$${dollarFormat(option.deliveryCents)} - `;
 
-            const isChecked = option.id === el.deliveryOptionId;
+            const isChecked = option.id === product.deliveryOptionId;
 
             deliveryOptionsHtml += `
 

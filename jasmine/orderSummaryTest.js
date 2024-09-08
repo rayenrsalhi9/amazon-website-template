@@ -1,5 +1,5 @@
 import { renderOrderSummary } from "../scripts/checkout-page/orderSummary.js";
-import { loadCartFromStorage, cart, updateDeliveryOption } from "../data/cart.js";
+import { cart } from "../data/class-cart.js";
 import { generatePayment } from "../scripts/checkout-page/payment.js";
 
 
@@ -34,7 +34,7 @@ describe('test suite: renderOrderSummary', () => {
             ]);
         });
 
-        loadCartFromStorage();
+        cart.loadFromStorage();
         renderOrderSummary();
     });
 
@@ -81,10 +81,10 @@ describe('test suite: renderOrderSummary', () => {
         ).toContain('Quantity: 2');   
         
         expect(
-            cart[0].productId
+            cart.products[0].productId
         ).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
 
-        expect(cart.length).toEqual(1);
+        expect(cart.products.length).toEqual(1);
 
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         
@@ -101,16 +101,16 @@ describe('test suite: renderOrderSummary', () => {
 
         deliveryOption3.click();
 
-        updateDeliveryOption(input3productId, input3deliveryId);
+        cart.updateDeliveryOption(input3productId, input3deliveryId);
         renderOrderSummary();
         generatePayment();
 
         expect(
-            cart[1].deliveryOptionId
+            cart.products[1].deliveryOptionId
         ).toEqual('3');
 
         expect(
-            cart[1].productId
+            cart.products[1].productId
         ).toEqual('15b6fc6f-327a-4ec4-896f-486349e85a3d');
 
         expect(
@@ -123,7 +123,7 @@ describe('test suite: renderOrderSummary', () => {
         .querySelector('.js-total-no-tax').innerText
         ).toEqual('$52.74');
 
-        expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart));
+        expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify(cart.products));
 
     });
 });

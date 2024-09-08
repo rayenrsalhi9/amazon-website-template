@@ -1,4 +1,4 @@
-import * as cartModule from '../data/cart.js';
+import { cart } from '../data/class-cart.js';
 import {products} from '../data/products.js';
 
 const cartQuantity = document.querySelector('.cart-quantity');
@@ -18,7 +18,8 @@ addButtons.forEach(btn => {
 
     const {productId} = btn.dataset;
     
-    cartModule.updateQuantity(productId, btn);
+    cart.updateQuantity(productId, btn);
+
     displayQuantity();
 
   });
@@ -103,8 +104,8 @@ function alertAddedProduct(opacity, btn) {
 function displayQuantity() {
   
   let quantity = 0;
-  cartModule.cart.forEach(i => {
-    quantity += i.quantity;
+  cart.products.forEach(product => {
+    quantity += product.quantity;
   });
   cartQuantity.innerText = quantity;
 }

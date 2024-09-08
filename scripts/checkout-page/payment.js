@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart } from "../../data/class-cart.js";
 import deliveryOptions from "../../data/deliveryOptions.js";
 import { products } from "../../data/products.js";
 import { dollarFormat } from "../../quickActions/dollarFormat.js";
@@ -7,14 +7,14 @@ export function generatePayment() {
 
     // calculate number of items :
     let items = 0;
-    cart.forEach(cartItem => {
+    cart.products.forEach(cartItem => {
         items += cartItem.quantity;
     });
 
     let total = 0;
     let matchingItem;
     products.forEach(product => {
-        cart.forEach(cartItem => {
+        cart.products.forEach(cartItem => {
             if (product.id === cartItem.productId) {
                 matchingItem = product;
                 const matchingItemPrice = matchingItem.priceCents
@@ -26,7 +26,7 @@ export function generatePayment() {
     let deliveryCost = 0;
     let matchingDeliveryItem;
     deliveryOptions.forEach(option => {
-        cart.forEach(cartItem => {
+        cart.products.forEach(cartItem => {
             if (option.id === cartItem.deliveryOptionId) {
                 matchingDeliveryItem = option;
                 deliveryCost += matchingDeliveryItem.deliveryCents;
