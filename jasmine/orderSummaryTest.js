@@ -1,7 +1,7 @@
 import { renderOrderSummary } from "../scripts/checkout-page/orderSummary.js";
 import { cart } from "../data/class-cart.js";
 import { generatePayment } from "../scripts/checkout-page/payment.js";
-import { loadBackend } from "../data/products.js";
+import { fetchBackend } from "../data/products.js";
 
 
 describe('test suite: renderOrderSummary', () => {
@@ -12,7 +12,7 @@ describe('test suite: renderOrderSummary', () => {
     let deleteLink1;
 
     beforeAll((done) => {
-        loadBackend(() => {
+        fetchBackend(() => {
             done();
         });
         
