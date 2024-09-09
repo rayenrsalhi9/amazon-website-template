@@ -12,7 +12,8 @@ describe('test suite: renderOrderSummary', () => {
     let deleteLink1;
 
     beforeAll((done) => {
-        fetchBackend(() => {
+        fetchBackend()
+        .then(() => {
             done();
         });
         

@@ -3,11 +3,16 @@ import { generatePayment } from './payment.js';
 import { fetchBackend } from '../../data/products.js';
 //import '../../data/backend-practice.js'
 
-new Promise((resolve) => {
+/* new Promise((resolve) => {
     fetchBackend(() => {
         resolve();
     });
 }).then(() => {
+    renderOrderSummary();
+    generatePayment();
+}); */
+
+fetchBackend().then(() => {
     renderOrderSummary();
     generatePayment();
 });

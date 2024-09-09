@@ -67,9 +67,9 @@ class Appliance extends Product {
 
 let products = [];
 
-function fetchBackend(fct) {
+function fetchBackend() {
 
-  fetch('https://supersimplebackend.dev/products')
+  const fetchPromise = fetch('https://supersimplebackend.dev/products')
 
   .then((response) => {
     return response.json();
@@ -81,10 +81,10 @@ function fetchBackend(fct) {
       else if (product.type === 'appliance') return new Appliance(product);
       else return new Product(product);
     });
-
-    fct();
     
   });
+
+  return fetchPromise;
 }
 
 /*
