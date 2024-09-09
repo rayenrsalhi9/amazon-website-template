@@ -1,10 +1,10 @@
 import { renderOrderSummary } from './orderSummary.js';
 import { generatePayment } from './payment.js';
-import { loadBackend } from '../../data/products.js';
+import { fetchBackend } from '../../data/products.js';
 //import '../../data/backend-practice.js'
 
 new Promise((resolve) => {
-    loadBackend(() => {
+    fetchBackend(() => {
         resolve();
     });
 }).then(() => {
