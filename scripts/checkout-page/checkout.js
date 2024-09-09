@@ -18,3 +18,32 @@ loadBackend(() => {
     generatePayment();
 });
 */
+
+// callback hell example
+
+/*
+loadBackend(() => {
+    loadCart(() => {
+        renderOrderSummary(() => {
+            generatePayment();
+        });
+    });
+});
+*/
+
+/*
+Promise.all([
+    new Promise((resolve) => {
+        console.log('hey')
+        resolve('1');
+    }),
+    new Promise((resolve) => {
+        console.log('bye');
+        resolve('2');
+    })
+]).then((values) => {
+    console.log(values); => all values in resolve (in an array, if empty : undefined)
+    renderOrderSummary();
+    generatePayment();
+});
+*/
