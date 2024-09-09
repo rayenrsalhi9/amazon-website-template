@@ -1,7 +1,7 @@
 import { cart } from '../data/class-cart.js';
-import {products, loadBackend} from '../data/products.js';
+import {products, fetchBackend} from '../data/products.js';
 
-loadBackend(renderProducts);
+fetchBackend(renderProducts);
 
 function renderProducts() {
   

@@ -67,6 +67,27 @@ class Appliance extends Product {
 
 let products = [];
 
+function fetchBackend(fct) {
+
+  fetch('https://supersimplebackend.dev/products')
+
+  .then((response) => {
+    return response.json();
+  })
+  
+  .then((response) => {
+    products = response.map(product => {
+      if (product.type === 'clothing') return new Clothing(product);
+      else if (product.type === 'appliance') return new Appliance(product);
+      else return new Product(product);
+    });
+
+    fct();
+    
+  });
+}
+
+/*
 function loadBackend(fct) {
 
   const request = new XMLHttpRequest();
@@ -84,9 +105,9 @@ function loadBackend(fct) {
 
   request.open('GET', 'https://supersimplebackend.dev/products');
   request.send();
-
-  
 }
+*/
+
 /*
 const products = [
   {
@@ -766,4 +787,4 @@ const products = [
 });
 */
 
-export {products, Product, Clothing, Appliance, loadBackend}
+export {products, Product, Clothing, Appliance, fetchBackend}
