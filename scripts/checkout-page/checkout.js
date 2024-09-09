@@ -1,7 +1,9 @@
 import { renderOrderSummary } from './orderSummary.js';
 import { generatePayment } from './payment.js';
-import '../../data/backend-practice.js'
+import { loadBackend } from '../../data/products.js';
+//import '../../data/backend-practice.js'
 
-renderOrderSummary();
-
-generatePayment();
+loadBackend(() => {
+    renderOrderSummary();
+    generatePayment();
+});
