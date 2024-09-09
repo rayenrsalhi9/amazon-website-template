@@ -1,6 +1,7 @@
 import { renderOrderSummary } from "../scripts/checkout-page/orderSummary.js";
 import { cart } from "../data/class-cart.js";
 import { generatePayment } from "../scripts/checkout-page/payment.js";
+import { loadBackend } from "../data/products.js";
 
 
 describe('test suite: renderOrderSummary', () => {
@@ -9,6 +10,13 @@ describe('test suite: renderOrderSummary', () => {
     let products;
     let productQuantity2;
     let deleteLink1;
+
+    beforeAll((done) => {
+        loadBackend(() => {
+            done();
+        });
+        
+    });
 
     beforeEach(() => {
         testContainer = document.querySelector('.test-container');
