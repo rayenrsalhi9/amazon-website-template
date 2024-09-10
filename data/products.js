@@ -68,15 +68,21 @@ let products = [];
 
 async function fetchBackend() {
 
-  const fetchData = await fetch('https://supersimplebackend.dev/products');
+  try {
+    const fetchData = await fetch('https://supersimplebackend.dev/products');
 
-  const data = await fetchData.json();
+    console.log(fetchData)
 
-  products = data.map(product => {
-    if (product.type === 'clothing') return new Clothing(product);
-    else if (product.type === 'appliance') return new Appliance(product);
-    else return new Product(product);
-  });
+    const data = await fetchData.json();
+
+    products = data.map(product => {
+      if (product.type === 'clothing') return new Clothing(product);
+      else if (product.type === 'appliance') return new Appliance(product);
+      else return new Product(product);
+    });
+  } catch(error) {
+    throw (error);
+  }
   
 }
 
