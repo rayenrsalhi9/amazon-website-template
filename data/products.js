@@ -69,9 +69,8 @@ let products = [];
 async function fetchBackend() {
 
   try {
+    
     const fetchData = await fetch('https://supersimplebackend.dev/products');
-
-    console.log(fetchData)
 
     const data = await fetchData.json();
 
