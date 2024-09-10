@@ -2,8 +2,7 @@ import { cart } from "../../data/class-cart.js";
 import deliveryOptions from "../../data/deliveryOptions.js";
 import { fetchBackend, products } from "../../data/products.js";
 import { dollarFormat } from "../../quickActions/dollarFormat.js";
-import { orders, addOrder } from "../../data/orders.js";
-import { renderOrderSummary } from "./orderSummary.js";
+import { addOrder, orders } from "../../data/orders.js";
 
 export function generatePayment() {
 
