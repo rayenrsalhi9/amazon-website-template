@@ -12,7 +12,8 @@ const ordersGrid = document.querySelector('.orders-grid');
 
 fetchBackend().then(() => {
     renderOrders();
-})
+    handleBuyAgain();
+});
 
 
 
@@ -91,7 +92,7 @@ function renderOrderInfo(order) {
                     <div class="product-name">${matchingItem.name}</div>
                     <div class="product-delivery-date">Arriving on: ${deliveryTime}</div>
                     <div class="product-quantity">Quantity: ${el.quantity}</div>
-                    <button class="buy-again-button button-primary">
+                    <button class="buy-again-button button-primary" data-id="${matchingItem.id}">
                         <img class="buy-again-icon" src="images/icons/buy-again.png">
                         <span class="buy-again-message">Buy it again</span>
                     </button>
@@ -108,4 +109,35 @@ function renderOrderInfo(order) {
         `;
     };
     return infoHtml;
+}
+
+function handleBuyAgain() {
+
+    const buttons = document.querySelectorAll('.buy-again-button');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            let matchingItem;
+
+            cart.products.forEach(product => {
+                if (product.productId === btn.dataset.id) matchingItem = product;
+            });
+
+            if (matchingItem) {
+                matchingItem.quantity ++;
+                cart.saveToStorage();
+                displayCartQuantity();
+            } else {
+                cart.products.push({
+                    productId: btn.dataset.id,
+                    quantity: 1,
+                    deliveryOptionId: '1'
+                });
+                cart.saveToStorage();
+                displayCartQuantity();
+            }
+        });
+    });
+
 }
