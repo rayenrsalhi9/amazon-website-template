@@ -4,8 +4,6 @@ import { dollarFormat } from "../../quickActions/dollarFormat.js";
 import { products } from "../../data/products.js";
 import { fetchBackend } from "../../data/products.js";
 
-
-const cartQuantity = document.querySelector('.cart-quantity');
 displayCartQuantity();
 
 const ordersGrid = document.querySelector('.orders-grid');
@@ -13,6 +11,7 @@ const ordersGrid = document.querySelector('.orders-grid');
 fetchBackend().then(() => {
     renderOrders();
     handleBuyAgain();
+    handleTrackPackage();
 });
 
 
@@ -20,6 +19,7 @@ fetchBackend().then(() => {
 // functions : 
 
 function displayCartQuantity() {
+    const cartQuantity = document.querySelector('.cart-quantity');
     let quantity = 0;
     cart.products.forEach(product => {
         quantity += product.quantity;
@@ -99,7 +99,7 @@ function renderOrderInfo(order) {
                 </div>
 
                 <div class="product-actions">
-                    <a href="tracking.html">
+                    <a href="tracking.html?orderId=${order.id}&productId=${matchingItem.id}">
                         <button class="track-package-button button-secondary">
                             Track package
                         </button>
@@ -140,4 +140,15 @@ function handleBuyAgain() {
         });
     });
 
+}
+
+function handleTrackPackage() {
+    const buttons = document.querySelectorAll('.track-package-button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            console.log(button.dataset.orderId);
+            console.log(button.dataset.productId);
+        })
+    })
 }
