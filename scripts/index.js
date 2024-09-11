@@ -114,5 +114,3 @@ function renderProducts() {
     cartQuantity.innerText = quantity;
   }
 }
-
-//export {addProductsToPage}

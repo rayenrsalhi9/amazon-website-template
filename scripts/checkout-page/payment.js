@@ -107,6 +107,5 @@ export function generatePayment() {
         }
 
         window.location.href = 'orders.html';
-
     });
 }
