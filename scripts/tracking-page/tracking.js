@@ -1,11 +1,13 @@
 import { orders } from "../../data/orders.js";
 import { fetchBackend, products } from "../../data/products.js";
+import { cart } from "../../data/class-cart.js";
 
 fetchBackend().then(() => {
     renderTrackingPage();
 });
 
 function renderTrackingPage() {
+    displayCartQuantity();
     const trackingContainer = document.querySelector('.main');
 
     const pageUrl = new URL(window.location.href);
@@ -36,7 +38,7 @@ function renderTrackingPage() {
             if (element.id === matchingItem.productId) matchingProductsItem = element;
         });
 
-        const arrivingDate = dayjs(matchingItem.estimatedDeliveryDate).format('dddd, MMMM D');
+        const arrivingDate = dayjs(matchingItem.estimatedDeliveryTime).format('dddd, MMMM D');
 
         trackingHtml = `
 
@@ -81,5 +83,14 @@ function renderTrackingPage() {
 
         trackingContainer.innerHTML = trackingHtml;
 
+    }
+
+    function displayCartQuantity() {
+        const cartQuantity = document.querySelector('.cart-quantity');
+        let quantity = 0;
+        cart.products.forEach(product => {
+            quantity += product.quantity;
+        });
+        cartQuantity.innerHTML = quantity;
     }
 }
