@@ -108,16 +108,18 @@ function renderProducts() {
 
     searchBar.addEventListener('keydown', () => {
       
-      let searchProducts = [];
+      setTimeout(() => {
+        let searchProducts = [];
 
-      products.forEach(product => {
-        if (product.name.toLowerCase().includes(searchBar.value.toLowerCase())) {
-          searchProducts.push(product);
-        }
-      });
+        products.forEach(product => {
+          if (product.name.toLowerCase().includes(searchBar.value.toLowerCase())) {
+            searchProducts.push(product);
+          }
+        });
 
-      addProductsToPage(searchProducts, productsGrid);
-      handleAddToCart();
+        addProductsToPage(searchProducts, productsGrid);
+        handleAddToCart();
+      })
     });
 
   }
