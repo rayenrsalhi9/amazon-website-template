@@ -139,6 +139,13 @@
   border-radius: 50%;
   cursor: pointer;
   transition: .6s;
+  outline: none;
+  border: none;
+}
+
+.dark-mode-container svg:focus {
+  border: none;
+  outline: none;
 }
 
 .dark-mode-container svg.clicked {
