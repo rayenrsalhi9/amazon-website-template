@@ -5,32 +5,18 @@ fetchBackend().then(() => renderProducts());
 
 function renderProducts() {
   
-  const cartQuantity = document.querySelector('.cart-quantity');
-  displayQuantity();
-
-  // select the container that has all products :
-  const productsGrid = document.querySelector('.products-grid');
-  addProductsToPage(productsGrid);
-
-  const addButtons = document.querySelectorAll('.add-to-cart-button');
   let opacity;
 
-  addButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+  handleSearchBar();
+  displayQuantity();
 
-      alertAddedProduct(opacity, btn)
+  const productsGrid = document.querySelector('.products-grid');
+  addProductsToPage(products, productsGrid);
 
-      const {productId} = btn.dataset;
-      
-      cart.updateQuantity(productId, btn);
-
-      displayQuantity();
-
-    });
-  });
+  handleAddToCart();
 
   // functions :
-  function addProductsToPage(productsGrid) {
+  function addProductsToPage(products, productsGrid) {
 
     let productsGridHtml = '';
 
@@ -106,11 +92,52 @@ function renderProducts() {
   }
 
   function displayQuantity() {
+
+    const cartQuantity = document.querySelector('.cart-quantity');
     
     let quantity = 0;
     cart.products.forEach(product => {
       quantity += product.quantity;
     });
     cartQuantity.innerText = quantity;
+  }
+
+  function handleSearchBar() {
+    
+    const searchBar = document.querySelector('.search-bar');
+
+    searchBar.addEventListener('keydown', () => {
+      
+      let searchProducts = [];
+
+      products.forEach(product => {
+        if (product.name.toLowerCase().includes(searchBar.value.toLowerCase())) {
+          searchProducts.push(product);
+        }
+      });
+
+      addProductsToPage(searchProducts, productsGrid);
+      handleAddToCart();
+    });
+
+  }
+
+  function handleAddToCart() {
+
+    const addButtons = document.querySelectorAll('.add-to-cart-button');
+  
+    addButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+
+        alertAddedProduct(opacity, btn)
+
+        const {productId} = btn.dataset;
+        
+        cart.updateQuantity(productId, btn);
+
+        displayQuantity();
+
+      });
+    });
   }
 }
