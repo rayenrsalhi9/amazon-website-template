@@ -2,6 +2,12 @@
   margin-top: 60px;
 }
 
+@media (max-width:767px) {
+  .main {
+    margin-top: 100px;
+  }
+}
+
 .products-grid {
   display: grid;
 

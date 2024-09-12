@@ -9,6 +9,7 @@ function renderProducts() {
 
   handleSearchBar();
   displayQuantity();
+  handleDarkMode();
 
   const productsGrid = document.querySelector('.products-grid');
   addProductsToPage(products, productsGrid);
@@ -141,5 +142,14 @@ function renderProducts() {
 
       });
     });
+  }
+
+  function handleDarkMode() {
+    const container = document.querySelector('.dark-mode-container');
+    const icon = document.querySelector('.dark-mode-container i');
+    icon.addEventListener('click', () => {
+      icon.classList.toggle('clicked');
+      container.classList.toggle('clicked');
+    })
   }
 }

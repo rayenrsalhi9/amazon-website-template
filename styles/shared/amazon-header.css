@@ -1,22 +1,29 @@
+:root {
+  --header-bg: rgb(19, 25, 33);
+  --header-font-color: white;
+  --icons-color: rgb(254, 189, 105);
+}
+
 .amazon-header {
   background-color: rgb(19, 25, 33);
-  color: white;
+  color: var(--header-font-color);
   padding-left: 15px;
   padding-right: 15px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  min-height: 60px;
 }
 
 .amazon-header-left-section {
-  width: 180px;
+  width: 150px;
 }
 
 @media (max-width: 800px) {
@@ -61,7 +68,7 @@
 
 .amazon-header-middle-section {
   flex: 1;
-  max-width: 850px;
+  max-width: 550px;
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
@@ -81,7 +88,7 @@
 }
 
 .search-button {
-  background-color: rgb(254, 189, 105);
+  background-color: var(--icons-color);
   border: none;
   width: 45px;
   height: 40px;
@@ -97,10 +104,51 @@
 }
 
 .amazon-header-right-section {
-  width: 180px;
+  width: 260px;
   flex-shrink: 0;
   display: flex;
   justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+
+@media(max-width: 767px) {
+  .amazon-header-right-section {
+    margin: 0 auto;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+}
+
+.dark-mode-container {
+  width: 60px;
+  height: 10px;
+  border: 2px solid #fafafa;
+  position: relative;
+  border-radius: 50px;
+  transition: 1s;
+}
+
+.dark-mode-container i {
+  position: absolute;
+  top: -9px;
+  left: -5px;
+  background: #fafafa;
+  color: #272626;
+  padding: 4px 8px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  transition: .6s;
+}
+
+.dark-mode-container i.clicked {
+  transform: translateX(35px) rotate(360deg);
+  color: var(--icons-color);
+}
+
+.dark-mode-container.clicked {
+  background: var(--icons-color);
 }
 
 .orders-link {
