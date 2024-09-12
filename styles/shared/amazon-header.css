@@ -129,20 +129,19 @@
   transition: 1s;
 }
 
-.dark-mode-container i {
+.dark-mode-container svg {
   position: absolute;
   top: -9px;
   left: -5px;
   background: #fafafa;
   color: #272626;
-  padding: 4px 8px;
+  padding: 4px;
   border-radius: 50%;
-  font-size: 24px;
   cursor: pointer;
   transition: .6s;
 }
 
-.dark-mode-container i.clicked {
+.dark-mode-container svg.clicked {
   transform: translateX(35px) rotate(360deg);
   color: var(--icons-color);
 }

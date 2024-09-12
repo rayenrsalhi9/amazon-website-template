@@ -146,7 +146,7 @@ function renderProducts() {
 
   function handleDarkMode() {
     const container = document.querySelector('.dark-mode-container');
-    const icon = document.querySelector('.dark-mode-container i');
+    const icon = document.querySelector('.dark-mode-container svg');
     icon.addEventListener('click', () => {
       icon.classList.toggle('clicked');
       container.classList.toggle('clicked');
