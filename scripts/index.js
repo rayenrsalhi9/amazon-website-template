@@ -119,7 +119,7 @@ function renderProducts() {
 
         addProductsToPage(searchProducts, productsGrid);
         handleAddToCart();
-      })
+      }, 100);
     });
 
   }
