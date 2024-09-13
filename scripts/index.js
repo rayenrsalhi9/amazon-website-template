@@ -4,12 +4,14 @@ import {products, fetchBackend} from '../data/products.js';
 fetchBackend().then(() => renderProducts());
 
 function renderProducts() {
-  
+
   let opacity;
 
   handleSearchBar();
   displayQuantity();
   handleDarkMode();
+
+  initializeAppearance();
 
   const productsGrid = document.querySelector('.products-grid');
   addProductsToPage(products, productsGrid);
@@ -154,14 +156,35 @@ function renderProducts() {
       container.classList.toggle('clicked');
 
       if (icon.classList.contains('clicked')) {
-        
+
         document.documentElement.style.setProperty('--dark-color', '#fafafa');
         document.body.style.backgroundColor = '#111111';
+        localStorage.setItem('dark-mode', 'on');
 
       } else {
         document.documentElement.style.setProperty('--dark-color', '#111111');
         document.body.style.backgroundColor = 'white';
+        localStorage.setItem('dark-mode', 'off');
       }
     })
+  }
+
+  function initializeAppearance() {
+
+    const container = document.querySelector('.dark-mode-container');
+    const icon = document.querySelector('.dark-mode-container svg');
+
+    const darkModeOn = localStorage.getItem('dark-mode') || 'off';
+    if (darkModeOn === 'off') {
+      document.documentElement.style.setProperty('--dark-color', '#111111');
+      document.body.style.backgroundColor = 'white';
+      icon.classList.remove('clicked');
+      container.classList.remove('clicked');
+    } else {
+      document.documentElement.style.setProperty('--dark-color', '#fafafa');
+      document.body.style.backgroundColor = '#111111';
+      icon.classList.add('clicked');
+      container.classList.add('clicked');
+    }
   }
 }

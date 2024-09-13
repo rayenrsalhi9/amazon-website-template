@@ -13,6 +13,7 @@ fetchBackend().then(() => {
     handleBuyAgain();
     handleTrackPackage();
     handleDarkMode();
+    initializeAppearance();
 });
 
 
@@ -164,19 +165,56 @@ function handleDarkMode() {
       container.classList.toggle('clicked');
 
       if (icon.classList.contains('clicked')) {
+
+        localStorage.setItem('dark-mode', 'on');
         
         document.documentElement.style.setProperty('--dark-color', '#fafafa');
         document.body.style.backgroundColor = '#111111';
         document.querySelectorAll('.order-header').forEach(header => {
             header.style.backgroundColor = 'rgb(254, 189, 105)';
-        })
+        });
 
       } else {
+
+        localStorage.setItem('dark-mode', 'off');
+
         document.documentElement.style.setProperty('--dark-color', '#111111');
         document.body.style.backgroundColor = 'white';
         document.querySelectorAll('.order-header').forEach(header => {
             header.style.backgroundColor = 'rgb(240, 242, 242)';
-        })
+        });
       }
     })
+}
+
+function initializeAppearance() {
+
+    const container = document.querySelector('.dark-mode-container');
+    const icon = document.querySelector('.dark-mode-container svg');
+
+    const darkModeOn = localStorage.getItem('dark-mode') || 'off';
+
+    if (darkModeOn === 'off') {
+
+        icon.classList.remove('clicked');
+        container.classList.remove('clicked');
+        
+        document.documentElement.style.setProperty('--dark-color', '#111111');
+        document.body.style.backgroundColor = 'white';
+        document.querySelectorAll('.order-header').forEach(header => {
+            header.style.backgroundColor = 'rgb(240, 242, 242)';
+        });
+
+    } else {
+
+        icon.classList.add('clicked');
+        container.classList.add('clicked');
+
+        document.documentElement.style.setProperty('--dark-color', '#fafafa');
+        document.body.style.backgroundColor = '#111111';
+        document.querySelectorAll('.order-header').forEach(header => {
+            header.style.backgroundColor = 'rgb(254, 189, 105)';
+        });
+
+    }
 }
