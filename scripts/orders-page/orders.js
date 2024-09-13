@@ -12,6 +12,7 @@ fetchBackend().then(() => {
     renderOrders();
     handleBuyAgain();
     handleTrackPackage();
+    handleDarkMode();
 });
 
 
@@ -150,5 +151,32 @@ function handleTrackPackage() {
             console.log(button.dataset.orderId);
             console.log(button.dataset.productId);
         })
+    })
+}
+
+function handleDarkMode() {
+
+    const container = document.querySelector('.dark-mode-container');
+    const icon = document.querySelector('.dark-mode-container svg');
+
+    icon.addEventListener('click', () => {
+      icon.classList.toggle('clicked');
+      container.classList.toggle('clicked');
+
+      if (icon.classList.contains('clicked')) {
+        
+        document.documentElement.style.setProperty('--dark-color', '#fafafa');
+        document.body.style.backgroundColor = '#111111';
+        document.querySelectorAll('.order-header').forEach(header => {
+            header.style.backgroundColor = 'rgb(254, 189, 105)';
+        })
+
+      } else {
+        document.documentElement.style.setProperty('--dark-color', '#111111');
+        document.body.style.backgroundColor = 'white';
+        document.querySelectorAll('.order-header').forEach(header => {
+            header.style.backgroundColor = 'rgb(240, 242, 242)';
+        })
+      }
     })
 }
