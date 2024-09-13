@@ -150,6 +150,13 @@ function renderProducts() {
     icon.addEventListener('click', () => {
       icon.classList.toggle('clicked');
       container.classList.toggle('clicked');
+      if (icon.classList.contains('clicked')) {
+        document.documentElement.style.setProperty('--dark-color', '#fafafa');
+        document.body.style.backgroundColor = '#111111';
+      } else {
+        document.documentElement.style.setProperty('--dark-color', '#111111');
+        document.body.style.backgroundColor = 'white';
+      }
     })
   }
 }

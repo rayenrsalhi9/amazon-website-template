@@ -7,11 +7,13 @@
 
   --primary-link-bg: rgb(1, 124, 182);
   --primary-link-hover: rgb(196, 80, 0);
+
+  --dark-color: #111111;
 }
 
 body {
   font-family: Roboto, Arial;
-  color: #111111;
+  color: var(--dark-color);
   margin: 0;
 }
 
