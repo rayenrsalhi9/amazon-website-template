@@ -139,6 +139,7 @@
   padding: 4px;
   background: #fafafa;
   border-radius: 4px;
+  object-fit: contain;
 }
 
 .product-name {
